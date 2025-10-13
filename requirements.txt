@@ -1,0 +1,6 @@
+flask
+gunicorn
+pyannote.audio
+whisper-openai
+torch
+torchaudio
