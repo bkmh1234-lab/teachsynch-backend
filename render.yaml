@@ -1,12 +1,15 @@
+# Inside your render.yaml file
+
 services:
   - type: web
     name: teachsynch-backend
     runtime: python
     plan: free
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn --bind 0.0.0.0:$PORT flask_app:app"
+    # This is the line to fix
+    startCommand: "gunicorn --bind 0.0.0.0:$PORT flask_app:app" 
     envVars:
       - key: HUGGING_FACE_TOKEN
-        sync: false 
+        sync: false
     systemPackages:
       - name: ffmpeg
