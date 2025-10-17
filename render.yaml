@@ -4,6 +4,6 @@ services:
     runtime: python
     plan: free
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn --bind 0.0.0.0:$PORT flask_app.app"
+    startCommand: "gunicorn --bind 0.0.0.0:$PORT flask_app:app"
     systemPackages:
       - name: ffmpeg
