@@ -70,13 +70,13 @@ def process_audio_endpoint():
             segment_start = segment['start']
             segment_end = segment['end']
             segment_text = segment['text'].strip()
-
+            
             speaker_times = {}
             for turn, _, speaker in diarization.itertracks(yield_label=True):
                 overlap_start = max(segment_start, turn.start)
                 overlap_end = min(segment_end, turn.end)
                 overlap_duration = max(0, overlap_end - overlap_start)
-
+                
                 if overlap_duration > 0:
                     speaker_times[speaker] = speaker_times.get(speaker, 0) + overlap_duration
 
@@ -88,7 +88,7 @@ def process_audio_endpoint():
                 "text": segment_text,
                 "speaker": dominant_speaker
             })
-
+            
         # --- 4. Identify Teacher and assign roles ---
         speaker_talk_time = {}
         for seg in final_transcript:
