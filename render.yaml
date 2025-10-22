@@ -4,6 +4,15 @@ services:
     runtime: python
     plan: free
     buildCommand: "pip install -r requirements.txt"
+    
+    # This line fixes the "port scan timeout" error
     startCommand: "gunicorn --bind 0.0.0.0:$PORT flask_app:app"
+    
+    # This tells Render to use the secret you saved in the dashboard
+    envVars:
+      - key: HUGGING_FACE_TOKEN
+        fromSecret: HUGGING_FACE_TOKEN
+        
+    # This fixes the "ffmpeg" / "libtorchaudio" error
     systemPackages:
       - name: ffmpeg
